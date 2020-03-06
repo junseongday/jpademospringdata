@@ -7,7 +7,7 @@ import java.util.Date;
 public class Account {
     @Id @GeneratedValue
     private Long id;
-
+    
     @Column(unique = true, nullable = false)
     private String username;
 
@@ -30,6 +30,12 @@ public class Account {
 
     @Transient
     private String no;
+
+    @Embedded
+    @AttributeOverrides({
+           @AttributeOverride(name = "street",column = @Column(name = "home_street"))
+    })
+    private Address address;
 
     public String getEmail() {
         return email;
