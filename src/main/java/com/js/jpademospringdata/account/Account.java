@@ -1,19 +1,35 @@
 package com.js.jpademospringdata.account;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Account {
     @Id @GeneratedValue
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String username;
 
     private String password;
 
     private String email;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP )
+    private Date date = new Date();
+
+    private String yes;
+
+    @Transient
+    private String no;
 
     public String getEmail() {
         return email;
