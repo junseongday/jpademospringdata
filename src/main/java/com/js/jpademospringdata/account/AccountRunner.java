@@ -18,27 +18,20 @@ public class AccountRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Account account = new Account();
-        account.setUsername("JS2");
-        account.setPassword("jpa2");
 
-        Study study = new Study();
-        study.setName("JPA");
+        Post post = new Post();
+        post.setTitle("JPA 언제 보나?");
 
-        account.addStudy(study);
-//        account.getStudy().add(study);
-//        study.setOwner(account);
+        Comment comment = new Comment();
+        comment.setComment("빨리 보고 싶어요");
+        post.addComment(comment);
+
+        Comment comment1 = new Comment();
+        comment1.setComment("빨리 보고 싶어요");
+        post.addComment(comment1);
 
         //hibernate
         final Session session = entityManager.unwrap(Session.class);
-        session.save(account);
-        session.save(study);
-
-        final Account load = session.load(Account.class, account.getId());
-        account.setUsername("whiteship");
-        System.out.println("============================");
-        System.out.println(load.getUsername());
-        System.out.println("============================");
-
+        session.save(post);
     }
 }
