@@ -12,19 +12,24 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @Transactional
 public class AccountRunner implements ApplicationRunner {
-
-    @PersistenceContext
-    EntityManager entityManager;
 
     @Autowired
     PostRepository postRepository;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        postRepository.findAll().forEach(System.out::println);
+        Post post = new Post();
+        post.setTitle("천천히 꾸준히");
+        Comment comment = new Comment();
+        comment.setComment("빠르게 하기 보단 꾸준히 즐기면서 하자");
+
+        post.getComment().add(comment);
+
+        postRepository.save(post);
     }
 }
