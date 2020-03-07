@@ -33,5 +33,12 @@ public class AccountRunner implements ApplicationRunner {
         final Session session = entityManager.unwrap(Session.class);
         session.save(account);
         session.save(study);
+
+        final Account load = session.load(Account.class, account.getId());
+        account.setUsername("whiteship");
+        System.out.println("============================");
+        System.out.println(load.getUsername());
+        System.out.println("============================");
+
     }
 }
