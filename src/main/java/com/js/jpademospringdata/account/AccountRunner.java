@@ -1,5 +1,6 @@
 package com.js.jpademospringdata.account;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -19,17 +20,11 @@ public class AccountRunner implements ApplicationRunner {
     @PersistenceContext
     EntityManager entityManager;
 
+    @Autowired
+    PostRepository postRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
-//        final TypedQuery<Post> query = entityManager.createQuery("Select p from Post as p", Post.class);
-//        final List<Post> resultList = query.getResultList();
-//        resultList.forEach(System.out::println);
-        final CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Post> query = builder.createQuery(Post.class);
-        Root<Post> root = query.from(Post.class);
-        query.select(root);
-
-        final List<Post> postList = entityManager.createQuery(query).getResultList();
-        postList.forEach(System.out::println);
+        postRepository.findAll().forEach(System.out::println);
     }
 }
