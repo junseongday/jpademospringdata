@@ -22,11 +22,16 @@ public class AccountRunner implements ApplicationRunner {
         account.setUsername("JS2");
         account.setPassword("jpa2");
 
-        //jpa
-//        entityManager.persist(account);
+        Study study = new Study();
+        study.setName("JPA");
+
+        account.addStudy(study);
+//        account.getStudy().add(study);
+//        study.setOwner(account);
 
         //hibernate
         final Session session = entityManager.unwrap(Session.class);
         session.save(account);
+        session.save(study);
     }
 }
