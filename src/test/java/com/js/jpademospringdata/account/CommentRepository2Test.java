@@ -1,13 +1,15 @@
 package com.js.jpademospringdata.account;
 
+import jdk.nashorn.internal.runtime.options.Option;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -27,5 +29,16 @@ public class CommentRepository2Test {
 
         //then
         assertThat(count).isEqualTo(1);
+    }
+
+    @Test
+    public void findById() {
+        final Optional<Comment> byId = repository.findById(100l);
+        assertThat(byId).isEmpty();
+    }
+
+    @Test
+    public void save() {
+        repository.save(null);
     }
 }
